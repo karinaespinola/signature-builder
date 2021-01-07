@@ -1,3 +1,10 @@
-h1 {
-    color:red;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,600&display=swap');
+
+html, body {
+    font-family: 'Montserrat';
+}
+a.link {
+    color: $link-color;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
 }
