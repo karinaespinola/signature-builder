@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/custom.scss';
 import Navigation from './components/navigation/Navigation';
 import Builder from './components/builder/Builder';
