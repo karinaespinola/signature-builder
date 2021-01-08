@@ -1,14 +1,15 @@
 import React from 'react';
-import {Tabs,Tab} from 'react-bootstrap';
+import {Tabs,Tab, Col} from 'react-bootstrap';
+import General from './General';
 
 const MenuTabs = () => {
     return (
         <>
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                <Tab eventKey="home" title="Home">
-                    1
+            <Tabs defaultActiveKey="general" id="uncontrolled-tab-example">
+                <Tab eventKey="general" title="General">
+                    <General />
                 </Tab>
-                <Tab eventKey="profile" title="Profile">
+                <Tab eventKey="images" title="Images">
                     2
                 </Tab>
                 <Tab eventKey="contact" title="Contact">

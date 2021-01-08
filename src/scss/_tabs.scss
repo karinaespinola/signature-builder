@@ -18,3 +18,10 @@
         }
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .nav-link {
+        width: 100%;
+        text-align: center;
+    }
+}
