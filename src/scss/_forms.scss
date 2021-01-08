@@ -1,0 +1,16 @@
+.signature-builder {
+    input {
+        border-radius: 2rem;
+        border: .1rem solid #dee6f3;
+        background-color: #f7f9fd;
+        padding: 0.5rem 1rem;
+        transition: all .3s ease-in-out;
+        color: $text-color;
+
+        &:focus{
+            outline: none;
+            border: .1rem solid $text-color;
+            background: none;
+        }
+    }
+}

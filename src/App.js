@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Navigation />
-        <div className="container">
+        <div className="container signature-builder">
           <Builder />
         </div>
     </>
