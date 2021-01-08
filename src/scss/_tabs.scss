@@ -1,0 +1,20 @@
+.nav-tabs {
+    background-color: #e6ecf7;
+    border-radius: 10px;
+    .nav-link {
+        background-color: #e6ecf7;
+        color: #334e70;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 1em 2.5em;
+
+        &:hover {
+            background-color: #DEE6F3;
+        }
+
+        &.active{
+            background-color: #334E70;
+            color: white;
+        }
+    }
+}
