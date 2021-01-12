@@ -12,7 +12,7 @@ const MenuTabs = () => {
                 <Tab eventKey="images" title="Images">
                     2
                 </Tab>
-                <Tab eventKey="contact" title="Contact">
+                <Tab eventKey="templates" title="Templates">
                     3
                 </Tab>
             </Tabs>
