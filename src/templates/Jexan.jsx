@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
+import {UserDataContext} from '../contexts/UserDataProvider';
 
 const Jexan = () => {
+    const {userData} = React.useContext(UserDataContext);
+
     return (
         <div>
              <table cellPadding={0} cellSpacing={0} width={300}>
@@ -27,7 +30,7 @@ const Jexan = () => {
                                     <tr>
                                         <td>
                                             <span style={{display: 'inline-block', color: '#000000', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '16px', fontWeight: 'bold', textTransform: 'uppercase'}}>
-                                                Alejandra Urías
+                                                {userData.name}
                                             </span>
                                         </td>
                                     </tr>

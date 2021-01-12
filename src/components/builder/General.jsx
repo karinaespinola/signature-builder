@@ -1,7 +1,14 @@
 import React from 'react';
 import {Form, Row, Col} from 'react-bootstrap';
+import {UserDataContext} from '../../contexts/UserDataProvider';
 
 const General = () => {
+    const {userData, setUserData} = React.useContext(UserDataContext);
+
+    const updateUserData = (data) => {
+        setUserData({...userData, ...data});
+    }
+
     return (
         <>
             <Form className="mt-3">
@@ -10,7 +17,7 @@ const General = () => {
                     Name
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext name="name" />
+                        <Form.Control plaintext name="name" value={userData.name} onChange={(e) => updateUserData({name : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="company">
@@ -18,7 +25,7 @@ const General = () => {
                     Company
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="company"/>
+                        <Form.Control plaintext  name="company"  value={userData.company} onChange={(e) => updateUserData({company : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="position">
@@ -26,7 +33,7 @@ const General = () => {
                     Position
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="position"/>
+                        <Form.Control plaintext  name="position"  value={userData.position} onChange={(e) => updateUserData({position : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="department">
@@ -34,7 +41,7 @@ const General = () => {
                     Department
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="department"/>
+                        <Form.Control plaintext  name="department"  value={userData.department} onChange={(e) => updateUserData({department : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="phone">
@@ -42,7 +49,7 @@ const General = () => {
                     Phone
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="phone"/>
+                        <Form.Control plaintext  name="phone"  value={userData.phone} onChange={(e) => updateUserData({phone : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="mobile">
@@ -50,7 +57,7 @@ const General = () => {
                     Mobile
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="mobile"/>
+                        <Form.Control plaintext  name="mobile"  value={userData.mobile} onChange={(e) => updateUserData({mobile : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="website">
@@ -58,7 +65,7 @@ const General = () => {
                     Website
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="website"/>
+                        <Form.Control plaintext  name="website"  value={userData.website} onChange={(e) => updateUserData({website : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="address">
@@ -66,7 +73,7 @@ const General = () => {
                     Address
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="address"/>
+                        <Form.Control plaintext  name="address"  value={userData.address} onChange={(e) => updateUserData({website : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="skype">
@@ -74,7 +81,7 @@ const General = () => {
                     Skype
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="skype"/>
+                        <Form.Control plaintext  name="skype"  value={userData.skype} onChange={(e) => updateUserData({skype : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="email">
@@ -82,7 +89,7 @@ const General = () => {
                     Email
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext name="email"/>
+                        <Form.Control plaintext name="email"  value={userData.email} onChange={(e) => updateUserData({email : e.target.value})}/>
                     </Col>
                 </Form.Group>
             </Form>
