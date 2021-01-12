@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Navigation />
-      <Container>
+      <Container className="signature-builder">
         <Row>
           <Col xs="12" md="5" lg="6">
             <Builder />

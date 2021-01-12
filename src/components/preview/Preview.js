@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Jexan from '../../templates/Jexan';
 
 const Preview = () => {
     return (
         <div>
-            Hola soy el preview
+            <Jexan />
         </div>
     )
 }
