@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tabs,Tab, Col} from 'react-bootstrap';
 import General from './General';
+import Templates from './Templates/Templates';
 
 const MenuTabs = () => {
     return (
@@ -13,7 +14,7 @@ const MenuTabs = () => {
                     2
                 </Tab>
                 <Tab eventKey="templates" title="Templates">
-                    3
+                    <Templates />
                 </Tab>
             </Tabs>
         </>
