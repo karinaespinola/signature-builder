@@ -1,0 +1,15 @@
+.template-selector {
+    img {
+        border-radius: 10px;
+    }
+    input[type="radio"] {
+        display: none;
+    }
+    input[type="radio"]:checked {
+        & + label {
+            img {
+                border: 5px solid #ffc137;  
+            }            
+        }
+    } 
+}
