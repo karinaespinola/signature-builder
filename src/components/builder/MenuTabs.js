@@ -2,6 +2,7 @@ import React from 'react';
 import {Tabs,Tab, Col} from 'react-bootstrap';
 import General from './General';
 import Templates from './Templates/Templates';
+import Images from './Images/Images';
 import {UserDataContext} from '../../contexts/UserDataProvider';
 
 const MenuTabs = () => {
@@ -22,7 +23,7 @@ const MenuTabs = () => {
                     <General />
                 </Tab>
                 <Tab eventKey="images" title="Images">
-                    2
+                    <Images />
                 </Tab>
 
             </Tabs>

@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Avatar from './Avatar';
 
 const Images = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+          <Avatar />  
+        </>
     )
 }
 

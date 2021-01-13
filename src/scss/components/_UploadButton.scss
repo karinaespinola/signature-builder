@@ -1,0 +1,11 @@
+.upload-image {
+    width:150px;
+    padding: 1em;
+    text-align: center;
+    border: 3px dotted $secondary-color;
+    margin: 0 auto;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
