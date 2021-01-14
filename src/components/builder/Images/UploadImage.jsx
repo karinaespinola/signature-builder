@@ -23,8 +23,8 @@ const UploadImage = () => {
                 userData.avatarUrl 
                 ?  <ImagePreview src={userData,avatarUrl} />
                 :<>
-                    <UploadButton fileInputId="avatar" handleFileChange={handleFileChange}/>
-                    <CropImage show={show} imageFile={imageFile}/>
+                    <UploadButton fileInputId="avatar" handleFileChange={handleFileChange} setShow={setShow}/>
+                    <CropImage show={show} imageFile={imageFile} setShow={setShow}/>
                 </>               
             }
         </>

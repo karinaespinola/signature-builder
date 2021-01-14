@@ -7,7 +7,7 @@ import {Modal, Button} from 'react-bootstrap';
 
 
 const CropImage = (props) => {
-    const {show, imageFile} = props;
+    const {show, setShow, imageFile} = props;
 
     const ORIENTATION_TO_ANGLE = {
         '3': 180,
@@ -18,7 +18,7 @@ const CropImage = (props) => {
       const [imageSrc, setImageSrc] = React.useState('');
       const [crop, setCrop] = React.useState({ x: 0, y: 0 })
       const [rotation, setRotation] = React.useState(0)
-      const [zoom, setZoom] = React.useState(10)
+      const [zoom, setZoom] = React.useState(0.9)
       const [croppedAreaPixels, setCroppedAreaPixels] = React.useState(null)
       const [croppedImage, setCroppedImage] = React.useState(null)
       
@@ -26,16 +26,15 @@ const CropImage = (props) => {
           if(show) {
             readFile();
           }
-      }, []);
+      }, [show]);
 
       const readFile = async () => {
         let imageDataUrl = await convertToUrl();
         const orientation = await getOrientation(imageFile)
         const rotation = ORIENTATION_TO_ANGLE[orientation]
         if (rotation) {
-          imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
+          //imageDataUrl = await getRotatedImage(imageDataUrl, rotation)
         }
-        console.log(imageDataUrl);
         setImageSrc(imageDataUrl);
       }
 
@@ -50,15 +49,15 @@ const CropImage = (props) => {
       const handleShow = () => setShow(true);
     return (
         <div>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton></Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="cropper">
                 <Cropper
                     image={imageSrc}
                     crop={crop}
                     rotation={rotation}
                     zoom={zoom}
-                    aspect={4 / 3}
+                    aspect={1 / 1}
                     onCropChange={setCrop}
                     onRotationChange={setRotation}
                     onZoomChange={setZoom}
