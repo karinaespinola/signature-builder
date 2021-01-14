@@ -15,6 +15,7 @@ const MenuTabs = () => {
             activeKey={userData.menuTab} 
             id="menu-tabs"
             onSelect={(key) => updateUserData({...userData, menuTab: key})}
+            className="mb-5"
             >
                 <Tab eventKey="templates" title="Templates">
                     <Templates />
