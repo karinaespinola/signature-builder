@@ -64,7 +64,20 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = f
   }
 
   // As Base64 string
-  // return canvas.toDataURL('image/png');
+  //return canvas.toDataURL('image/png');
+ 
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(blob => {
+        if (!blob) {
+            //reject(new Error('Canvas is empty'));
+            console.error("Canvas is empty");
+            return;
+        }
+        blob.name = 'holi';
+        console.log(blob);
+        resolve(blob);
+    }, "image/png");
+});
 
   // As a blob
   return new Promise(resolve => {
