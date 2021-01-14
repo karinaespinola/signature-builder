@@ -17,9 +17,12 @@ const UploadButton = (props) => {
     }
 
     const handleChange = (e) => {
+        const fileInput = document.getElementById(fileInputId);
+
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             handleFileChange(file);
+            fileInput.value = null;
         }
     }
 

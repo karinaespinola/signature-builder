@@ -3,7 +3,7 @@ import React from 'react';
 import Cropper from 'react-easy-crop';
 import { getCroppedImg, getRotatedImage } from '../../../utilities/Canvas';
 import { getOrientation } from 'get-orientation/browser';
-import {Modal, Button} from 'react-bootstrap';
+import {Modal, Button, Form} from 'react-bootstrap';
 
 
 const CropImage = (props) => {
@@ -52,16 +52,22 @@ const CropImage = (props) => {
             <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton></Modal.Header>
                 <Modal.Body className="cropper">
-                <Cropper
-                    image={imageSrc}
-                    crop={crop}
-                    rotation={rotation}
-                    zoom={zoom}
-                    aspect={1 / 1}
-                    onCropChange={setCrop}
-                    onRotationChange={setRotation}
-                    onZoomChange={setZoom}
-                />
+                    <Cropper
+                        image={imageSrc}
+                        crop={crop}
+                        rotation={rotation}
+                        zoom={zoom}
+                        aspect={1 / 1}
+                        onCropChange={setCrop}
+                        onRotationChange={setRotation}
+                        onZoomChange={setZoom}
+                    />
+                    <Form>
+                        <Form.Group controlId="formBasicRange">
+                            <Form.Label>Range</Form.Label>
+                            <Form.Control type="range" />
+                        </Form.Group>
+                    </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
