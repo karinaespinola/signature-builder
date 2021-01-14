@@ -3,7 +3,7 @@ import React from 'react';
 import Cropper from 'react-easy-crop';
 import { getCroppedImg, getRotatedImage } from '../../../utilities/Canvas';
 import { getOrientation } from 'get-orientation/browser';
-import {Modal, Button, Form} from 'react-bootstrap';
+import {Modal, Button, Form, Row, Col} from 'react-bootstrap';
 
 
 const CropImage = (props) => {
@@ -14,7 +14,8 @@ const CropImage = (props) => {
         '6': 90,
         '8': -90,
       }
-
+      const [loading, setLoading] = React.useState(true);
+      const [height, setHeight] = React.useState(300);
       const [imageSrc, setImageSrc] = React.useState('');
       const [crop, setCrop] = React.useState({ x: 0, y: 0 })
       const [rotation, setRotation] = React.useState(0)
@@ -46,12 +47,18 @@ const CropImage = (props) => {
           })
       }
       const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
+
+      const getCropperComponent = () => {
+        const cropper = 
+        setLoading(false);
+        return cropper;
+      }
+
     return (
         <div>
             <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton></Modal.Header>
-                <Modal.Body className="cropper">
+                <Modal.Body className="cropper" >
                     <Cropper
                         image={imageSrc}
                         crop={crop}
@@ -62,13 +69,25 @@ const CropImage = (props) => {
                         onRotationChange={setRotation}
                         onZoomChange={setZoom}
                     />
-                    <Form>
-                        <Form.Group controlId="formBasicRange">
-                            <Form.Label>Range</Form.Label>
-                            <Form.Control type="range" />
-                        </Form.Group>
-                    </Form>
                 </Modal.Body>
+                <Row style={{padding:'1em'}}>
+                    <Col xs="12" sm="6">
+                        <Form>
+                            <Form.Group controlId="formBasicRange">
+                                <Form.Label>Zoom</Form.Label>
+                                <Form.Control type="range" value={zoom} step={0.5} min={0} max={5} onChange={(e) => {setZoom(e.target.value)}} />
+                            </Form.Group> 
+                        </Form>
+                    </Col>
+                    <Col xs="12" sm="6">
+                        <Form>
+                            <Form.Group controlId="formBasicRange">
+                                <Form.Label>Rotation</Form.Label>
+                                <Form.Control type="range" step={1} min={0} max={360} value={rotation} onChange={(e) => {setRotation(e.target.value)}} />
+                            </Form.Group> 
+                        </Form>
+                    </Col>
+                </Row>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
