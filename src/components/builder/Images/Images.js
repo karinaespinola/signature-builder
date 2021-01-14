@@ -1,10 +1,10 @@
 import React from 'react';
-import Avatar from './Avatar';
+import UploadImage from './UploadImage';
 
 const Images = () => {
     return (
         <>
-          <Avatar />  
+          <UploadImage />  
         </>
     )
 }

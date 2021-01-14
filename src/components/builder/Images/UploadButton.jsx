@@ -6,7 +6,7 @@ import {Row, Col} from 'react-bootstrap';
 
 const UploadButton = (props) => {
 
-    const {fileInputId} = props;
+    const {fileInputId, handleFileChange} = props;
 
     const handleClick = (e) => {
         const fileInput = document.getElementById(fileInputId);
@@ -15,11 +15,19 @@ const UploadButton = (props) => {
         }
         fileInput.click();
     }
+
+    const handleChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            handleFileChange(file);
+        }
+    }
+
     return (
         <div className="upload-image" onClick={(e) => handleClick(e)}>
             <FontAwesomeIcon icon={faCloudUploadAlt} size="2x" />
             <p>Upload Image</p>
-            <input type="file" name={fileInputId} id={fileInputId} className="d-none"/>
+            <input type="file" name={fileInputId} id={fileInputId} className="d-none" onChange={(e) => handleChange(e)}/>
         </div>            
     )
 }
