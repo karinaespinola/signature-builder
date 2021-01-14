@@ -9,15 +9,13 @@ import { faSquare, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 const CropImage = (props) => {
-    const {show, setShow, imageFile} = props;
+    const {show, setShow, imageFile, setImageBlob, handleUpload} = props;
 
     const ORIENTATION_TO_ANGLE = {
         '3': 180,
         '6': 90,
         '8': -90,
       }
-      const [loading, setLoading] = React.useState(true);
-      const [height, setHeight] = React.useState(300);
       const [imageSrc, setImageSrc] = React.useState('');
       const [cropShape, setCropShape] = React.useState('rect');
       const [crop, setCrop] = React.useState({ x: 0, y: 0 })
@@ -33,7 +31,7 @@ const CropImage = (props) => {
       }, [show]);
 
       const readFile = async () => {
-        let imageDataUrl = await convertToUrl();
+        let imageDataUrl = await convertToUrl(imageFile);
         const orientation = await getOrientation(imageFile)
         const rotation = ORIENTATION_TO_ANGLE[orientation]
         if (rotation) {
@@ -42,21 +40,36 @@ const CropImage = (props) => {
         setImageSrc(imageDataUrl);
       }
 
-      const convertToUrl = () => {
+      const convertToUrl = (file) => {
         return new Promise(resolve => {
             const reader = new FileReader()
             reader.addEventListener('load', () => resolve(reader.result), false)
-            reader.readAsDataURL(imageFile);
+            reader.readAsDataURL(file);
           })
       }
       const handleClose = () => setShow(false);
 
-      const getCropperComponent = () => {
-        const cropper = 
-        setLoading(false);
-        return cropper;
-      }
+      const onCropComplete = React.useCallback((croppedArea, croppedAreaPixels) => {
+        setCroppedAreaPixels(croppedAreaPixels)
+      }, [])
 
+      const handleSave = React.useCallback(async () => {
+        try {
+          const croppedImage = await getCroppedImg(
+            imageSrc,
+            croppedAreaPixels,
+            rotation,
+            cropShape === 'round' ? true : false
+          )
+          setCroppedImage(croppedImage);
+          setImageBlob(croppedImage);
+          handleUpload(croppedImage);
+        } catch (e) {
+          console.error(e)
+        }
+      }, [imageSrc, croppedAreaPixels, rotation]);
+
+    
     return (
         <div>
             <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
@@ -72,6 +85,7 @@ const CropImage = (props) => {
                         onRotationChange={setRotation}
                         onZoomChange={setZoom}
                         cropShape={cropShape}
+                        onCropComplete={onCropComplete}
                     />
                 </Modal.Body>
                 <Row style={{padding:'1em'}}>
@@ -103,7 +117,7 @@ const CropImage = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleSave}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
