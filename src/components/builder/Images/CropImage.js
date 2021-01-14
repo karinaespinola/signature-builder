@@ -4,6 +4,8 @@ import Cropper from 'react-easy-crop';
 import { getCroppedImg, getRotatedImage } from '../../../utilities/Canvas';
 import { getOrientation } from 'get-orientation/browser';
 import {Modal, Button, Form, Row, Col} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquare, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 const CropImage = (props) => {
@@ -17,6 +19,7 @@ const CropImage = (props) => {
       const [loading, setLoading] = React.useState(true);
       const [height, setHeight] = React.useState(300);
       const [imageSrc, setImageSrc] = React.useState('');
+      const [cropShape, setCropShape] = React.useState('rect');
       const [crop, setCrop] = React.useState({ x: 0, y: 0 })
       const [rotation, setRotation] = React.useState(0)
       const [zoom, setZoom] = React.useState(0.9)
@@ -68,6 +71,7 @@ const CropImage = (props) => {
                         onCropChange={setCrop}
                         onRotationChange={setRotation}
                         onZoomChange={setZoom}
+                        cropShape={cropShape}
                     />
                 </Modal.Body>
                 <Row style={{padding:'1em'}}>
@@ -75,7 +79,7 @@ const CropImage = (props) => {
                         <Form>
                             <Form.Group controlId="formBasicRange">
                                 <Form.Label>Zoom</Form.Label>
-                                <Form.Control type="range" value={zoom} step={0.5} min={0} max={5} onChange={(e) => {setZoom(e.target.value)}} />
+                                <Form.Control type="range" value={zoom} step={0.2} min={0} max={5} onChange={(e) => {setZoom(e.target.value)}} />
                             </Form.Group> 
                         </Form>
                     </Col>
@@ -86,6 +90,13 @@ const CropImage = (props) => {
                                 <Form.Control type="range" step={1} min={0} max={360} value={rotation} onChange={(e) => {setRotation(e.target.value)}} />
                             </Form.Group> 
                         </Form>
+                    </Col>
+                </Row>
+                <Row style={{padding:'1em'}}>
+                    <Col xs="12" sm="6">
+                        <p>Shape</p>
+                        <FontAwesomeIcon icon={faSquare} size="2x" className="mr-3" role="button" onClick={(e) => {setCropShape('rect')}}/>
+                        <FontAwesomeIcon icon={faCircle} size="2x" role="button" onClick={(e) => {setCropShape('round')}}/>
                     </Col>
                 </Row>
                 <Modal.Footer>
