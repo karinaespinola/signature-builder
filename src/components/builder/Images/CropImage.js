@@ -59,10 +59,11 @@ const CropImage = (props) => {
             imageSrc,
             croppedAreaPixels,
             rotation,
-            cropShape === 'round' ? true : false
+            cropShape === 'round' ? true : false,
+            true
           )
-          setCroppedImage(croppedImage);
-          setImageBlob(croppedImage);
+          //setCroppedImage(croppedImage);
+          //setImageBlob(croppedImage);
           handleUpload(croppedImage);
         } catch (e) {
           console.error(e)

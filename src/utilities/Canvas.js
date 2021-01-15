@@ -1,3 +1,5 @@
+const reduce = require('image-blob-reduce');
+
 const createImage = url =>
   new Promise((resolve, reject) => {
     const image = new Image()
@@ -18,7 +20,7 @@ function getRadianAngle(degreeValue) {
  * @param {number} rotation - optional rotation parameter
  * @param {boolean} round - optional if the crop is in round shape
  */
-export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = false) {
+export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = false, resize = false) {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
@@ -65,7 +67,7 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = f
 
   // As Base64 string
   //return canvas.toDataURL('image/png');
- 
+
   return new Promise((resolve, reject) => {
     canvas.toBlob(blob => {
         if (!blob) {
@@ -73,18 +75,17 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = f
             console.error("Canvas is empty");
             return;
         }
-        blob.name = 'holi';
-        console.log(blob);
+        blob.name = 'signature-image';
+        console.log('Here at the cropping ' + blob);
         resolve(blob);
     }, "image/png");
 });
-
-  // As a blob
-  return new Promise(resolve => {
-    canvas.toBlob(file => {
-      resolve(URL.createObjectURL(file))
-    }, 'image/png')
-  })
+   // // As a blob
+  // return new Promise(resolve => {
+  //   canvas.toBlob(file => {
+  //     resolve(URL.createObjectURL(file))
+  //   }, 'image/png')
+  // })
 }
 
 export async function getRotatedImage(imageSrc, rotation = 0) {
@@ -111,4 +112,13 @@ export async function getRotatedImage(imageSrc, rotation = 0) {
       resolve(URL.createObjectURL(file))
     }, 'image/jpeg')
   })
+}
+
+export async function reduceBlob(originalBlob) {
+  await reduce
+  .toBlob(originalBlob, { max: 300 })
+  .then(blob => { 
+    console.log(blob);
+    return blob;
+  });
 }
