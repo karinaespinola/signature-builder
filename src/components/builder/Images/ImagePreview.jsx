@@ -4,7 +4,12 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const ImagePreview = (props) => {
     // eslint-disable-next-line react/prop-types
-    const {src, showDeleteButton, previewWidth} = props;
+    const {src, showDeleteButton, previewWidth, handleDeleteButton} = props;
+
+    const handleClick = (e) => {
+       handleDeleteButton(e);
+    }
+
     return (
         <div style={{position: 'relative', maxWidth: previewWidth}}>
             <img 
@@ -15,7 +20,7 @@ const ImagePreview = (props) => {
             {
                 showDeleteButton
                 ? <>
-                    <span className="delete-image-button">
+                    <span className="delete-image-button" onClick={(e) => handleClick(e)}>
                         <FontAwesomeIcon icon={faTimes} role="button"/>
                     </span>                    
                  </>

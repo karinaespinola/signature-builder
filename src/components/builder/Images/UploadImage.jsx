@@ -7,7 +7,7 @@ import {storage} from '../../../firebase/firebase';
 import {getFileName} from '../../../utilities/String';
 
 const UploadImage = (props) => {
-    const {updateContextProperty, imageWidth, imageHeight, imagePreviewUrl, previewWidth, showDeleteButton} = props;
+    const {updateContextProperty, imageWidth, imageHeight, imagePreviewUrl, previewWidth, showDeleteButton, handleDeleteButton} = props;
     
     const [show, setShow] = React.useState(false);
     const [imageFile, setImageFile] = React.useState('');
@@ -56,7 +56,12 @@ const UploadImage = (props) => {
         <>
             {
                 imagePreviewUrl 
-                ?  <ImagePreview src={imagePreviewUrl} previewWidth={previewWidth} showDeleteButton={showDeleteButton}/>
+                ?  <ImagePreview 
+                    src={imagePreviewUrl} 
+                    previewWidth={previewWidth} 
+                    showDeleteButton={showDeleteButton} 
+                    handleDeleteButton={handleDeleteButton} 
+                    />
                 :<>
                     <UploadButton fileInputId="avatar" handleFileChange={handleFileChange} setShow={setShow}/>
                     <CropImage 

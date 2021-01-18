@@ -11,6 +11,11 @@ const Images = () => {
     setAvatarImageUrl(url);
     updateUserData({...userData, avatarImageUrl: url});
   }
+  
+  const handleDeleteButton = (event) => {
+    setAvatarImageUrl(null);
+    updateUserData({...userData, avatarImageUrl: null})
+  }
 
     return (
         <>
@@ -21,6 +26,7 @@ const Images = () => {
           imagePreviewUrl={userData.avatarImageUrl}
           previewWidth={150}
           showDeleteButton={true}
+          handleDeleteButton={handleDeleteButton}
           />  
         </>
     )
