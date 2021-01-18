@@ -26,7 +26,7 @@ const Jexan = () => {
                                     {
                                         userData.avatarImageUrl && (
                                             <td width={110} align="center">
-                                                <a href="https://www.instagram.com/thejexans/" target="_blank" rel="noreferrer">
+                                                <a href={userData.avatarImageLink ? userData.avatarImageLink : ''} target="_blank" rel="noreferrer">
                                                     <img src={userData.avatarImageUrl} alt="Jexan" width={85} height={90} style={{width: '85px', height: '90px'}} />
                                                 </a>
                                             </td>
