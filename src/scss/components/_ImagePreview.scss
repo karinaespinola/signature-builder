@@ -1,0 +1,13 @@
+.delete-image-button {
+    position: absolute;
+    background-color: $danger;
+    color: white;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 1.8;
+    right: -5px;
+    top: -5px;
+    cursor: pointer;
+}
