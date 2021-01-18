@@ -7,22 +7,31 @@ import {storage} from '../../../firebase/firebase';
 import {getFileName} from '../../../utilities/String';
 
 const UploadImage = (props) => {
-    const {updateContextProperty, imageWidth, imageHeight, imagePreviewUrl, previewWidth, showDeleteButton, handleDeleteButton} = props;
+    const {
+      updateContextProperty, 
+      imageWidth, 
+      imageHeight, 
+      imagePreviewUrl, 
+      previewWidth, 
+      showDeleteButton, 
+      handleDeleteButton,
+      setFileName
+    } = props;
     
     const [show, setShow] = React.useState(false);
     const [imageFile, setImageFile] = React.useState('');
     const [progress, setProgress] = React.useState(20);
-    const [fileName, setFileName] = React.useState('avatar-image');
+    const [imageFileName, setImageFileName] = React.useState('avatar-image');
     const [uploading, setUploading] = React.useState(false);
 
     const handleFileChange = async (file) => {
         setImageFile(file);
         setShow(true);
-        setFileName(getFileName(file.name));
+        setImageFileName(getFileName(file.name));
     }
 
     const handleUpload = (croppedImage) => {
-        const uploadTask = storage.ref(`images/${fileName}.png`).put(croppedImage);
+        const uploadTask = storage.ref(`images/${imageFileName}.png`).put(croppedImage);
         uploadTask.on(
           "state_changed",
           snapshot => {
@@ -40,10 +49,11 @@ const UploadImage = (props) => {
           () => {
             storage
               .ref("images")
-              .child(fileName + '.png')
+              .child(imageFileName + '.png')
               .getDownloadURL()
               .then(url => {
                 updateContextProperty(url);
+                setFileName(imageFileName + '.png');
                 setUploading(false);
                 setProgress(20);
                 setShow(false);
@@ -60,7 +70,7 @@ const UploadImage = (props) => {
                     src={imagePreviewUrl} 
                     previewWidth={previewWidth} 
                     showDeleteButton={showDeleteButton} 
-                    handleDeleteButton={handleDeleteButton} 
+                    handleDeleteButton={handleDeleteButton}
                     />
                 :<>
                     <UploadButton fileInputId="avatar" handleFileChange={handleFileChange} setShow={setShow}/>
