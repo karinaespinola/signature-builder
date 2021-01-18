@@ -24,15 +24,15 @@ const Jexan = () => {
                             <table cellPadding={0} cellSpacing={0} width={300}>
                                 <tr>
                                     {
-                                        userData.avatarImage && (
+                                        userData.avatarImageUrl && (
                                             <td width={110} align="center">
                                                 <a href="https://www.instagram.com/thejexans/" target="_blank" rel="noreferrer">
-                                                    <img src={userData.avatarImageSrc} alt="Jexan" width={85} height={90} style={{width: '85px', height: '90px'}} />
+                                                    <img src={userData.avatarImageUrl} alt="Jexan" width={85} height={90} style={{width: '85px', height: '90px'}} />
                                                 </a>
                                             </td>
                                         )
                                     }
-                                    <td width={userData.avatarImage ? 190 : 300}>                                                            
+                                    <td width={userData.avatarImageUrl ? 190 : 300}>                                                            
                                         <table cellPadding={0} cellSpacing={0} border={0}>
                                             <tbody>
                                                 {

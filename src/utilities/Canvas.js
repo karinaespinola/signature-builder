@@ -1,4 +1,5 @@
-const reduce = require('image-blob-reduce');
+import ImageBlobReduce from 'image-blob-reduce';
+const reduce = new ImageBlobReduce();
 
 const createImage = url =>
   new Promise((resolve, reject) => {
@@ -67,7 +68,34 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = f
 
   // As Base64 string
   //return canvas.toDataURL('image/png');
+  if(!resize) {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(blob => {
+            if (!blob) {
+                //reject(new Error('Canvas is empty'));
+                console.error("Canvas is empty");
+                return;
+            }
+            blob.name = 'signature-image';
+            console.log('Here at the cropping ' + blob);
+            resolve(blob);
+        }, "image/png");
+    });
+  }
+  else {
+    let resizedCanvas = resizeCanvas(canvas, 300, 300);
+    return getCanvasBlob(resizedCanvas);
+  }
 
+   // // As a blob
+  // return new Promise(resolve => {
+  //   canvas.toBlob(file => {
+  //     resolve(URL.createObjectURL(file))
+  //   }, 'image/png')
+  // })
+}
+
+export function getCanvasBlob(canvas) {
   return new Promise((resolve, reject) => {
     canvas.toBlob(blob => {
         if (!blob) {
@@ -79,13 +107,18 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = f
         console.log('Here at the cropping ' + blob);
         resolve(blob);
     }, "image/png");
-});
-   // // As a blob
-  // return new Promise(resolve => {
-  //   canvas.toBlob(file => {
-  //     resolve(URL.createObjectURL(file))
-  //   }, 'image/png')
-  // })
+  });
+}
+
+export function resizeCanvas(originalCanvas, newWidth, newHeight) {
+  let tmpCanvas = document.createElement('canvas');
+  tmpCanvas.width = newWidth;
+  tmpCanvas.height = newHeight;
+
+  let ctx = tmpCanvas.getContext('2d');
+  ctx.drawImage(originalCanvas,0,0,originalCanvas.width,originalCanvas.height,0,0,newWidth,newHeight);
+
+  return tmpCanvas;
 }
 
 export async function getRotatedImage(imageSrc, rotation = 0) {

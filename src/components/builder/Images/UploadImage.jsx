@@ -7,7 +7,7 @@ import {storage} from '../../../firebase/firebase';
 import {reduceBlob} from '../../../utilities/Canvas';
 
 const UploadImage = () => {
-    const {userData} = React.useContext(UserDataContext);
+    const {userData, updateUserData} = React.useContext(UserDataContext);
 
     const [show, setShow] = React.useState(false);
     const [imageFile, setImageFile] = React.useState('');
@@ -24,7 +24,7 @@ const UploadImage = () => {
         console.log('Here at the upload: ' + croppedImage);
         const reducedImage = reduceBlob(croppedImage);
 
-        const uploadTask = storage.ref(`images/holi-friend.png`).put(reducedImage);
+        const uploadTask = storage.ref(`images/holi-friend-2.png`).put(croppedImage);
         uploadTask.on(
           "state_changed",
           snapshot => {
@@ -39,11 +39,11 @@ const UploadImage = () => {
           () => {
             storage
               .ref("images")
-              .child('holi-friend.png')
+              .child('holi-friend-2.png')
               .getDownloadURL()
               .then(url => {
-                  console.log(url);
                 setImageUrl(url);
+                updateUserData({...userData, avatarImageUrl: url});
                 setShow(false);
               });
           }
