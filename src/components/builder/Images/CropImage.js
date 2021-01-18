@@ -3,13 +3,13 @@ import React from 'react';
 import Cropper from 'react-easy-crop';
 import { getCroppedImg, getRotatedImage } from '../../../utilities/Canvas';
 import { getOrientation } from 'get-orientation/browser';
-import {Modal, Button, Form, Row, Col} from 'react-bootstrap';
+import {Modal, Button, Form, Row, Col, ProgressBar} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 const CropImage = (props) => {
-    const {show, setShow, imageFile, setImageBlob, handleUpload} = props;
+    const {show, setShow, imageFile, handleUpload, progress, uploading} = props;
 
     const ORIENTATION_TO_ANGLE = {
         '3': 180,
@@ -62,8 +62,6 @@ const CropImage = (props) => {
             cropShape === 'round' ? true : false,
             true
           )
-          //setCroppedImage(croppedImage);
-          //setImageBlob(croppedImage);
           handleUpload(croppedImage);
         } catch (e) {
           console.error(e)
@@ -75,45 +73,59 @@ const CropImage = (props) => {
         <div>
             <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton></Modal.Header>
-                <Modal.Body className="cropper" >
-                    <Cropper
-                        image={imageSrc}
-                        crop={crop}
-                        rotation={rotation}
-                        zoom={zoom}
-                        aspect={1 / 1}
-                        onCropChange={setCrop}
-                        onRotationChange={setRotation}
-                        onZoomChange={setZoom}
-                        cropShape={cropShape}
-                        onCropComplete={onCropComplete}
-                    />
-                </Modal.Body>
-                <Row style={{padding:'1em'}}>
-                    <Col xs="12" sm="6">
-                        <Form>
-                            <Form.Group controlId="formBasicRange">
-                                <Form.Label>Zoom</Form.Label>
-                                <Form.Control type="range" value={zoom} step={0.2} min={0} max={5} onChange={(e) => {setZoom(e.target.value)}} />
-                            </Form.Group> 
-                        </Form>
-                    </Col>
-                    <Col xs="12" sm="6">
-                        <Form>
-                            <Form.Group controlId="formBasicRange">
-                                <Form.Label>Rotation</Form.Label>
-                                <Form.Control type="range" step={1} min={0} max={360} value={rotation} onChange={(e) => {setRotation(e.target.value)}} />
-                            </Form.Group> 
-                        </Form>
-                    </Col>
-                </Row>
-                <Row style={{padding:'1em'}}>
-                    <Col xs="12" sm="6">
-                        <p>Shape</p>
-                        <FontAwesomeIcon icon={faSquare} size="2x" className="mr-3" role="button" onClick={(e) => {setCropShape('rect')}}/>
-                        <FontAwesomeIcon icon={faCircle} size="2x" role="button" onClick={(e) => {setCropShape('round')}}/>
-                    </Col>
-                </Row>
+                {
+                    uploading
+                    ? <Row style={{padding:'2em'}}>
+                        <Col xs="12">
+                            <ProgressBar now={progress} label={`${progress}%`} />
+                        </Col>                    
+                    </Row> 
+                    : <div>
+                        <Modal.Body className="cropper" >
+                            <Cropper
+                                image={imageSrc}
+                                crop={crop}
+                                rotation={rotation}
+                                zoom={zoom}
+                                aspect={1 / 1}
+                                onCropChange={setCrop}
+                                onRotationChange={setRotation}
+                                onZoomChange={setZoom}
+                                cropShape={cropShape}
+                                onCropComplete={onCropComplete}
+                            />
+                        </Modal.Body>
+                        <Row style={{padding:'1em'}}>
+                            <Col xs="12" sm="6">
+                                <Form>
+                                    <Form.Group controlId="formBasicRange">
+                                        <Form.Label>Zoom</Form.Label>
+                                        <Form.Control type="range" value={zoom} step={0.2} min={0} max={5} onChange={(e) => {setZoom(e.target.value)}} />
+                                    </Form.Group> 
+                                </Form>
+                            </Col>
+                            <Col xs="12" sm="6">
+                                <Form>
+                                    <Form.Group controlId="formBasicRange">
+                                        <Form.Label>Rotation</Form.Label>
+                                        <Form.Control type="range" step={1} min={0} max={360} value={rotation} onChange={(e) => {setRotation(e.target.value)}} />
+                                    </Form.Group> 
+                                </Form>
+                            </Col>
+                        </Row>
+                        <Row style={{padding:'1em'}}>
+                            <Col xs="12" sm="6">
+                                <p>Shape</p>
+                                <FontAwesomeIcon icon={faSquare} size="2x" className="mr-3" role="button" onClick={(e) => {setCropShape('rect')}}/>
+                                <FontAwesomeIcon icon={faCircle} size="2x" role="button" onClick={(e) => {setCropShape('round')}}/>
+                            </Col>
+                        </Row>
+                    </div>
+                }
+               
+
+
+
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close

@@ -13,6 +13,7 @@ const UploadImage = () => {
     const [imageFile, setImageFile] = React.useState('');
     const [progress, setProgress] = React.useState(0);
     const [fileName, setFileName] = React.useState('avatar-image');
+    const [uploading, setUploading] = React.useState(false);
 
     const handleFileChange = async (file) => {
         setImageFile(file);
@@ -29,9 +30,12 @@ const UploadImage = () => {
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             );
             setProgress(currentProgress);
+            setUploading(true);
           },
           error => {
             console.log(error);
+            setProgress(0);
+            setUploading(false);
           },
           () => {
             storage
@@ -40,6 +44,8 @@ const UploadImage = () => {
               .getDownloadURL()
               .then(url => {
                 updateUserData({...userData, avatarImageUrl: url});
+                setUploading(false);
+                setProgress(0);
                 setShow(false);
               });
           }
@@ -53,7 +59,7 @@ const UploadImage = () => {
                 ?  <ImagePreview src={userData,avatarUrl} />
                 :<>
                     <UploadButton fileInputId="avatar" handleFileChange={handleFileChange} setShow={setShow}/>
-                    <CropImage show={show} imageFile={imageFile} setShow={setShow} handleUpload={handleUpload}/>
+                    <CropImage show={show} imageFile={imageFile} setShow={setShow} handleUpload={handleUpload} progress={progress} uploading={uploading}/>
                 </>               
             }
         </>
