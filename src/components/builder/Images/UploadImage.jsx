@@ -4,34 +4,31 @@ import ImagePreview from './ImagePreview';
 import UploadButton from './UploadButton';
 import CropImage from './CropImage';
 import {storage} from '../../../firebase/firebase';
-import {reduceBlob} from '../../../utilities/Canvas';
+import {getFileName} from '../../../utilities/String';
 
 const UploadImage = () => {
     const {userData, updateUserData} = React.useContext(UserDataContext);
 
     const [show, setShow] = React.useState(false);
     const [imageFile, setImageFile] = React.useState('');
-    const [imageBlob, setImageBlob] = React.useState('');
-    const [imageUrl, setImageUrl] = React.useState('');
     const [progress, setProgress] = React.useState(0);
+    const [fileName, setFileName] = React.useState('avatar-image');
 
     const handleFileChange = async (file) => {
         setImageFile(file);
         setShow(true);
+        setFileName(getFileName(file.name));
     }
 
     const handleUpload = (croppedImage) => {
-        console.log('Here at the upload: ' + croppedImage);
-        const reducedImage = reduceBlob(croppedImage);
-
-        const uploadTask = storage.ref(`images/holi-friend-2.png`).put(croppedImage);
+        const uploadTask = storage.ref(`images/${fileName}.png`).put(croppedImage);
         uploadTask.on(
           "state_changed",
           snapshot => {
-            const progress = Math.round(
+            const currentProgress = Math.round(
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             );
-            setProgress(progress);
+            setProgress(currentProgress);
           },
           error => {
             console.log(error);
@@ -39,10 +36,9 @@ const UploadImage = () => {
           () => {
             storage
               .ref("images")
-              .child('holi-friend-2.png')
+              .child(fileName + '.png')
               .getDownloadURL()
               .then(url => {
-                setImageUrl(url);
                 updateUserData({...userData, avatarImageUrl: url});
                 setShow(false);
               });
@@ -57,7 +53,7 @@ const UploadImage = () => {
                 ?  <ImagePreview src={userData,avatarUrl} />
                 :<>
                     <UploadButton fileInputId="avatar" handleFileChange={handleFileChange} setShow={setShow}/>
-                    <CropImage show={show} imageFile={imageFile} setShow={setShow} setImageBlob={setImageBlob} handleUpload={handleUpload}/>
+                    <CropImage show={show} imageFile={imageFile} setShow={setShow} handleUpload={handleUpload}/>
                 </>               
             }
         </>
