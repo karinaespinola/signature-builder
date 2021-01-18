@@ -20,6 +20,9 @@ function getRadianAngle(degreeValue) {
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter
  * @param {boolean} round - optional if the crop is in round shape
+ * @param {boolean} resize - optional if the image needs to be resized
+ * @param {float} imageWidth - optional image's width for resizing
+ * @param {float} imageHeight - optional image's height for resizing
  */
 export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = false, resize = false) {
   const image = await createImage(imageSrc)
@@ -83,7 +86,7 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = f
     });
   }
   else {
-    let resizedCanvas = resizeCanvas(canvas, 300, 300);
+    let resizedCanvas = resizeCanvas(canvas, imageWidth, imageHeight);
     return getCanvasBlob(resizedCanvas);
   }
 
