@@ -2,7 +2,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
-import {Row, Col} from 'react-bootstrap';
 
 const UploadButton = (props) => {
 

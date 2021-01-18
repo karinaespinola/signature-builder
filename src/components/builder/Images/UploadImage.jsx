@@ -1,17 +1,17 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
-import {UserDataContext} from '../../../contexts/UserDataProvider';
 import ImagePreview from './ImagePreview';
 import UploadButton from './UploadButton';
 import CropImage from './CropImage';
 import {storage} from '../../../firebase/firebase';
 import {getFileName} from '../../../utilities/String';
 
-const UploadImage = () => {
-    const {userData, updateUserData} = React.useContext(UserDataContext);
-
+const UploadImage = (props) => {
+    const {updateContextProperty, imageWidth, imageHeight, imagePreviewUrl, previewWidth, showDeleteButton} = props;
+    
     const [show, setShow] = React.useState(false);
     const [imageFile, setImageFile] = React.useState('');
-    const [progress, setProgress] = React.useState(0);
+    const [progress, setProgress] = React.useState(20);
     const [fileName, setFileName] = React.useState('avatar-image');
     const [uploading, setUploading] = React.useState(false);
 
@@ -34,7 +34,7 @@ const UploadImage = () => {
           },
           error => {
             console.log(error);
-            setProgress(0);
+            setProgress(20);
             setUploading(false);
           },
           () => {
@@ -43,9 +43,9 @@ const UploadImage = () => {
               .child(fileName + '.png')
               .getDownloadURL()
               .then(url => {
-                updateUserData({...userData, avatarImageUrl: url});
+                updateContextProperty(url);
                 setUploading(false);
-                setProgress(0);
+                setProgress(20);
                 setShow(false);
               });
           }
@@ -55,11 +55,20 @@ const UploadImage = () => {
     return (
         <>
             {
-                userData.avatarUrl 
-                ?  <ImagePreview src={userData,avatarUrl} />
+                imagePreviewUrl 
+                ?  <ImagePreview src={imagePreviewUrl} previewWidth={previewWidth} showDeleteButton={showDeleteButton}/>
                 :<>
                     <UploadButton fileInputId="avatar" handleFileChange={handleFileChange} setShow={setShow}/>
-                    <CropImage show={show} imageFile={imageFile} setShow={setShow} handleUpload={handleUpload} progress={progress} uploading={uploading}/>
+                    <CropImage 
+                    show={show} 
+                    imageFile={imageFile} 
+                    setShow={setShow} 
+                    handleUpload={handleUpload} 
+                    progress={progress} 
+                    uploading={uploading} 
+                    imageWidth={imageWidth}
+                    imageHeight={imageHeight}
+                    />
                 </>               
             }
         </>
