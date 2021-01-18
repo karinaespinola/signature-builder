@@ -55,6 +55,7 @@ const CropImage = (props) => {
 
       const handleSave = React.useCallback(async () => {
         try {
+            console.log(imageWidth, imageHeight);
           const croppedImage = await getCroppedImg(
             imageSrc,
             croppedAreaPixels,

@@ -24,7 +24,7 @@ function getRadianAngle(degreeValue) {
  * @param {float} imageWidth - optional image's width for resizing
  * @param {float} imageHeight - optional image's height for resizing
  */
-export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = false, resize = false) {
+export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = false, resize = false, imageWidth, imageHeight) {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
@@ -80,7 +80,6 @@ export async function getCroppedImg(imageSrc, pixelCrop, rotation = 0, round = f
                 return;
             }
             blob.name = 'signature-image';
-            console.log('Here at the cropping ' + blob);
             resolve(blob);
         }, "image/png");
     });
@@ -107,7 +106,6 @@ export function getCanvasBlob(canvas) {
             return;
         }
         blob.name = 'signature-image';
-        console.log('Here at the cropping ' + blob);
         resolve(blob);
     }, "image/png");
   });
