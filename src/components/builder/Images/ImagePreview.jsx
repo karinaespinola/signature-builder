@@ -11,7 +11,7 @@ const ImagePreview = (props) => {
     }
 
     return (
-        <div style={{position: 'relative', maxWidth: previewWidth}}>
+        <div style={{position: 'relative', maxWidth: previewWidth, margin: '0 auto'}}>
             <img 
             src={src} 
             alt="" 
