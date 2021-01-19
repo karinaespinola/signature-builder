@@ -32,7 +32,7 @@ const Jexan = () => {
                                         userData.avatarImageUrl && (
                                             <td width={110} align="center">
                                                 <a href={userData.avatarImageLink ? userData.avatarImageLink : ''} target="_blank" rel="noreferrer">
-                                                    <img src={userData.avatarImageUrl} alt="Jexan" width={85} height={90} style={{width: '85px', height: '90px'}} />
+                                                    <img src={userData.avatarImageUrl} alt="Jexan" width={90} height={90} style={{width: '85px', height: '90px'}} />
                                                 </a>
                                             </td>
                                         )
@@ -52,30 +52,60 @@ const Jexan = () => {
                                                     )
                                                 }
                                                 {
-                                                    userData.position && (
+                                                    userData.position || userData.department
+                                                    ?
                                                         <tr>
                                                             <td>
                                                                 <span style={{display: 'inline-block', color: '#000000', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '16px'}}>
-                                                                    {userData.position}
+                                                                    {userData.position ? userData.position : null} {userData.department ? ' | ' + userData.department : null}
                                                                 </span>
                                                             </td>
                                                         </tr>
-                                                    )
+                                                    : null
+                                                    
                                                 }
                                                 <tr>
                                                     <td height={10}><div style={{height: '10px'}} /></td>
                                                 </tr>
-                                                <tr>
-                                                    <td style={{lineHeight: 1}}>
-                                                    <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '14px', lineHeight: 1, fontWeight: 'normal'}}>
-                                                        <a href="https://maps.google.com/?cid=14652959725652235882" rel="noreferrer" style={{color: '#000000', textDecoration: 'none', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '14px', lineHeight: '0.9', fontWeight: 'normal'}} target="_blank">
-                                                        515 E Grant St.<br />
-                                                        Suite 150<br />
-                                                        Phoenix, AZ 85004
-                                                        </a>
-                                                    </span>
-                                                    </td>
-                                                </tr>
+                                                {
+                                                    userData.address_1 || userData.address_2 || userData.city || userData.zip || userData.state
+                                                    ? <tr>
+                                                        <td style={{lineHeight: 1}}>
+                                                        <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '14px', lineHeight: 1, fontWeight: 'normal', color: '#000'}}>
+                                                            {
+                                                                userData.address_1
+                                                                ? <>
+                                                                    {userData.address_1} <br/>
+                                                                  </>
+                                                                : null
+                                                            }
+                                                            {
+                                                                userData.address_2
+                                                                ? <>
+                                                                    {userData.address_2} <br/>
+                                                                  </>
+                                                                : null
+                                                            }
+                                                            {
+                                                                userData.city
+                                                                ? <>{userData.city},</>                                                                
+                                                                : null
+                                                            }
+                                                            {
+                                                                userData.state
+                                                                ? <>{' ' + userData.state}</>                                                                  
+                                                                : null
+                                                            }
+                                                            {
+                                                                userData.zip
+                                                                ? <>{' ' + userData.zip}</>                                                                 
+                                                                : null
+                                                            }                                                            
+                                                        </span>
+                                                        </td>
+                                                    </tr>
+                                                    : null
+                                                }
                                             </tbody>
                                         </table>
                                     </td>
@@ -84,7 +114,7 @@ const Jexan = () => {
                         </td>                        
                     </tr>
                     {
-                        userData.email || userData.phone 
+                        userData.email || userData.website || userData.skype || userData.phone || userData.mobile
                         ?
                         <>
                             <tr>
@@ -93,27 +123,68 @@ const Jexan = () => {
                                     <tbody>
                                         <tr>
                                             {
-                                                userData.email && (
+                                                userData.email || userData.website || userData.skype
+                                                ?
                                                     <>
                                                         <td style={{borderRight: '2px solid #000000', paddingRight:'5px'}} width={150}>
-                                                            <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
-                                                                <a style={{color: '#000000', textDecoration: 'none', display: 'inline'}} href={`mailto:${userData.email}`}>{userData.email}</a>
-                                                            </span>
-                                                        </td>
-                                                        <td width={5} />
+                                                            {
+                                                                userData.email
+                                                                ? <>
+                                                                    <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
+                                                                        <a style={{color: '#000000', textDecoration: 'none', display: 'inline'}} href={`mailto:${userData.email}`}><strong>Email:</strong> {userData.email}</a>
+                                                                    </span>
+                                                                    <br />
+                                                                  </>
+                                                                : null
+                                                            }
+                                                            {
+                                                                userData.website
+                                                                ? <>
+                                                                    <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
+                                                                        <strong>Website:</strong> {userData.website}
+                                                                    </span>
+                                                                    <br />
+                                                                  </>
+                                                                : null
+                                                            }
+                                                            {
+                                                                userData.skype
+                                                                ? <>
+                                                                    <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
+                                                                        <strong>Skype:</strong> {userData.skype}
+                                                                    </span>
+                                                                    <br />
+                                                                  </>
+                                                                : null
+                                                            }
+                                                        </td>                                                        
                                                     </>
-                                                )
+                                                : null                                                
                                             }
                                             {
-                                                userData.phone && (
-                                                <>
-                                                    <td align='right' width={userData.email ? 150 : 300} >
-                                                        <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
-                                                            <a style={{color: '#000000', textDecoration: 'none', display: 'inline'}}>{userData.phone}</a>
-                                                        </span>
-                                                    </td>
-                                                </>
-                                                )
+                                                userData.phone || userData.mobile
+                                                ?   <td align='right' width={userData.email || userData.website || userData.skype ? 150 : 300} >
+                                                        {
+                                                            userData.phone
+                                                            ? <>
+                                                                <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
+                                                                    <a style={{color: '#000000', textDecoration: 'none', display: 'inline'}}><strong>Office:</strong> {userData.phone}</a>
+                                                                </span>
+                                                                <br/>
+                                                            </>
+                                                            : null
+                                                        }
+                                                        {
+                                                            userData.mobile
+                                                            ? <>
+                                                                <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
+                                                                    <a style={{color: '#000000', textDecoration: 'none', display: 'inline'}}><strong>Mobile:</strong> {userData.mobile}</a>
+                                                                </span>
+                                                            </>
+                                                            : null
+                                                        }
+                                                    </td>   
+                                                : null
                                             }
                                         </tr>
                                     </tbody>

@@ -68,12 +68,44 @@ const General = () => {
                         <Form.Control plaintext  name="website"  value={userData.website ? userData.website : ''} onChange={(e) => changeUserData({website : e.target.value})}/>
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} controlId="address">
+                <Form.Group as={Row} controlId="address_1">
                     <Form.Label column sm="2">
-                    Address
+                    Address Line 1
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext  name="address"  value={userData.address ? userData.address : ''} onChange={(e) => changeUserData({website : e.target.value})}/>
+                        <Form.Control plaintext  name="address_1"  value={userData.address_1 ? userData.address_1 : ''} onChange={(e) => changeUserData({address_1 : e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="address_2">
+                    <Form.Label column sm="2">
+                    Address Line 2
+                    </Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext  name="address_2"  value={userData.address_2 ? userData.address_2 : ''} onChange={(e) => changeUserData({address_2 : e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="city">
+                    <Form.Label column sm="2">
+                    City
+                    </Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext  name="city"  value={userData.city ? userData.city : ''} onChange={(e) => changeUserData({city : e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="state">
+                    <Form.Label column sm="2">
+                    State
+                    </Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext  name="state"  value={userData.state ? userData.state : ''} onChange={(e) => changeUserData({state : e.target.value})}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="zip">
+                    <Form.Label column sm="2">
+                    Zip
+                    </Form.Label>
+                    <Col sm="10">
+                        <Form.Control plaintext  name="zip"  value={userData.zip ? userData.zip : ''} onChange={(e) => changeUserData({zip : e.target.value})}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} controlId="skype">
