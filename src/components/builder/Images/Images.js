@@ -3,6 +3,7 @@ import {UserDataContext} from '../../../contexts/UserDataProvider';
 import UploadImage from './UploadImage';
 import AddImageLink from './AddImageLink';
 import {storage} from '../../../firebase/firebase';
+import BannerDropDown from './BannerDropDown';
 
 const Images = () => {
   const {userData, updateUserData} = React.useContext(UserDataContext);
@@ -45,7 +46,11 @@ const Images = () => {
           setFileName={setAvatarFileName}
           />
 
-          <AddImageLink updateImageLink={updateAvatarLink} />  
+          <AddImageLink updateImageLink={updateAvatarLink} />
+
+          <hr></hr>
+          <h4>Banner</h4>
+          <BannerDropDown />
         </>
     )
 }
