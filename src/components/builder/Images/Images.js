@@ -33,6 +33,7 @@ const Images = () => {
 
     return (
         <>
+          <h4>Avatar</h4>
           <UploadImage 
           updateContextProperty={updateAvatarImageUrl} 
           imageWidth={300} 
