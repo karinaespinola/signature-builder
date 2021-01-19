@@ -118,7 +118,7 @@ const Jexan = () => {
                         ?
                         <>
                             <tr>
-                            <td>
+                            <td valign="top">
                                 <table cellPadding={0} cellSpacing={0} >
                                     <tbody>
                                         <tr>
@@ -126,7 +126,7 @@ const Jexan = () => {
                                                 userData.email || userData.website || userData.skype
                                                 ?
                                                     <>
-                                                        <td style={{borderRight: '2px solid #000000', paddingRight:'5px'}} width={150}>
+                                                        <td style={{borderRight: '2px solid #000000', paddingRight:'5px'}} width={150} valign="top">
                                                             {
                                                                 userData.email
                                                                 ? <>
@@ -163,7 +163,7 @@ const Jexan = () => {
                                             }
                                             {
                                                 userData.phone || userData.mobile
-                                                ?   <td align='right' width={userData.email || userData.website || userData.skype ? 150 : 300} >
+                                                ?   <td align='right' width={userData.email || userData.website || userData.skype ? 150 : 300} valign="top">
                                                         {
                                                             userData.phone
                                                             ? <>
