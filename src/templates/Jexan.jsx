@@ -6,7 +6,7 @@ const Jexan = () => {
 
     return (
         <div>
-             <table cellPadding={0} cellSpacing={0} width={300}>
+             <table cellPadding={3} cellSpacing={0} width={300}>
                 <tbody>
                     <tr>
                         <td align="center">
@@ -19,7 +19,12 @@ const Jexan = () => {
                             <div style={{height: '5px'}} />
                         </td>
                     </tr>
-                    <tr style={{borderBottom: '2px solid #000000'}}>
+                    <tr style=
+                        {
+                            userData.email || userData.phone 
+                            ? {borderBottom: '2px solid #000000'}
+                            : {}
+                        }>
                         <td>
                             <table cellPadding={0} cellSpacing={0} width={300}>
                                 <tr>
@@ -83,13 +88,8 @@ const Jexan = () => {
                         ?
                         <>
                             <tr>
-                                <td>
-                                    <div style={{height: '5px'}} />
-                                </td>
-                            </tr>
-                            <tr>
                             <td>
-                                <table>
+                                <table cellPadding={0} cellSpacing={0} >
                                     <tbody>
                                         <tr>
                                             {

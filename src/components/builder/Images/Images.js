@@ -10,6 +10,7 @@ const Images = () => {
   const [avatarFileName, setAvatarFileName] = React.useState(null);
 
 
+
   const updateAvatarImageUrl = (url) => {
     setAvatarImageUrl(url);
     updateUserData({...userData, avatarImageUrl: url});
@@ -26,6 +27,10 @@ const Images = () => {
     });
   }
 
+  const updateAvatarLink = (link) => {
+    updateUserData({...userData, avatarImageLink: link})
+  }
+
     return (
         <>
           <UploadImage 
@@ -37,7 +42,9 @@ const Images = () => {
           showDeleteButton={true}
           handleDeleteButton={handleAvatarDeleteButton}
           setFileName={setAvatarFileName}
-          />  
+          />
+
+          <AddImageLink updateImageLink={updateAvatarLink} />  
         </>
     )
 }
