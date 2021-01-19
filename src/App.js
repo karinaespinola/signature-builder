@@ -13,10 +13,10 @@ function App() {
       <UserDataProvider>
         <Container className="signature-builder">
           <Row>
-            <Col xs="12" md="5" lg="6">              
+            <Col xs={12} sm={12} md={12} lg={7} className="mb-5">              
                 <Builder />                      
             </Col>
-            <Col xs="12" md="7" lg="6">
+            <Col xs={12} sm={12} md={12} lg={5}>
                 <Preview />
             </Col>
           </Row>
