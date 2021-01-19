@@ -195,6 +195,10 @@ const Jexan = () => {
                         : null
                     }
 
+                    {
+                        
+                    }
+
                 </tbody>
             </table>
         </div>
