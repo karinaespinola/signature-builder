@@ -1,9 +1,9 @@
 .nav-tabs {
-    background-color: $secondary-color;
+    background-color: $light-grey;
     border-radius: 10px;
     .nav-link {
-        background-color: $secondary-color;
-        color: $primary-color;
+        background-color: $light-grey;
+        color: $primary;
         font-weight: bold;
         border-radius: 10px;
         padding: 1em 2.5em;
@@ -13,7 +13,7 @@
         }
 
         &.active{
-            background-color: $primary-color;
+            background-color: $primary;
             color: white;
         }
     }

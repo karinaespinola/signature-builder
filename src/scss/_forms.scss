@@ -5,11 +5,11 @@
         background-color: #f7f9fd;
         padding: 0.5rem 1rem;
         transition: all .3s ease-in-out;
-        color: $primary-color;
+        color: $primary;
 
         &:focus{
             outline: none;
-            border: .1rem solid $primary-color;
+            border: .1rem solid $primary;
             background: none;
         }
     }

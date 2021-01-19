@@ -1,5 +1,5 @@
-@import "~bootstrap/scss/bootstrap";
 @import './variables';
+@import "~bootstrap/scss/bootstrap";
 @import './global';
 @import './tabs';
 @import './forms';
@@ -7,3 +7,4 @@
 @import './components/UploadButton';
 @import './components/CropImage';
 @import './components/ImagePreview';
+

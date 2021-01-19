@@ -3,10 +3,10 @@
 html, body {
     font-family: 'Montserrat';
     font-size: $font-size;
-    color: $primary-color;
+    color: $primary;
 }
 a.link {
-    color: $primary-color;
+    color: $primary;
     text-decoration: none;
     transition: all .3s ease-in-out;
 }
