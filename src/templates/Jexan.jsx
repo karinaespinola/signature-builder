@@ -1,5 +1,8 @@
 import React from 'react';
 import {UserDataContext} from '../contexts/UserDataProvider';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faInstagram, faTwitter, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons'
+
 
 const Jexan = () => {
     const {userData} = React.useContext(UserDataContext);
@@ -168,7 +171,7 @@ const Jexan = () => {
                                                             userData.phone
                                                             ? <>
                                                                 <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
-                                                                    <a style={{color: '#000000', textDecoration: 'none', display: 'inline'}}><strong>Office:</strong> {userData.phone}</a>
+                                                                    <strong>Office:</strong> {userData.phone}
                                                                 </span>
                                                                 <br/>
                                                             </>
@@ -178,7 +181,7 @@ const Jexan = () => {
                                                             userData.mobile
                                                             ? <>
                                                                 <span style={{fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '11px', lineHeight: 1, fontWeight: 'normal', color: '#000000'}}>
-                                                                    <a style={{color: '#000000', textDecoration: 'none', display: 'inline'}}><strong>Mobile:</strong> {userData.mobile}</a>
+                                                                    <strong>Mobile:</strong> {userData.mobile}
                                                                 </span>
                                                             </>
                                                             : null
@@ -192,6 +195,52 @@ const Jexan = () => {
                             </td>
                         </tr>
                         </>
+                        : null
+                    }
+                    {
+                        userData.facebook || userData.instagram || userData.twitter || userData.youtube || userData.linkedin
+                        ? <tr>
+                            <td align="left" width={300}>
+                                {
+                                    userData.facebook && (
+                                        <a href={userData.facebook} target="_blank" rel="noreferrer" className="mr-1 facebook">
+                                            <FontAwesomeIcon icon={faFacebook} size="2x"/>
+                                        </a>                                       
+                                    )
+                                }
+                                {
+                                    userData.instagram && (
+                                        <a href={userData.instagram} target="_blank" rel="noreferrer" className="mr-1 instagram">
+                                            <FontAwesomeIcon icon={faInstagram} size="2x"/>
+                                        </a>                                       
+                                    )
+                                }
+                                                                {
+                                    userData.twitter && (
+                                        <a href={userData.twitter} target="_blank" rel="noreferrer" className="mr-1 twitter">
+                                            <FontAwesomeIcon icon={faTwitter} size="2x"/>
+                                        </a>                                       
+                                    )
+                                }
+                                                                {
+                                    userData.linkedin && (
+                                        <a href={userData.linkedin} target="_blank" rel="noreferrer" className="mr-1 linkedin">
+                                            <FontAwesomeIcon icon={faLinkedin} size="2x"/>
+                                        </a>                                       
+                                    )
+                                }
+                                                                {
+                                    userData.youtube && (
+                                        <a href={userData.youtube} target="_blank" rel="noreferrer" className="youtube">
+                                            <FontAwesomeIcon icon={faYoutube} size="2x"/>
+                                        </a>                                       
+                                    )
+                                }
+
+                                
+                            
+                            </td>
+                        </tr>
                         : null
                     }
 

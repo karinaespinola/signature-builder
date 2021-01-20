@@ -4,6 +4,7 @@ import General from './General';
 import Templates from './Templates/Templates';
 import Images from './Images/Images';
 import {UserDataContext} from '../../contexts/UserDataProvider';
+import Social from './Social';
 
 const MenuTabs = () => {
     const {userData, updateUserData} = React.useContext(UserDataContext);
@@ -26,7 +27,9 @@ const MenuTabs = () => {
                 <Tab eventKey="images" title="Images">
                     <Images />
                 </Tab>
-
+                <Tab eventKey="social" title="Social">
+                    <Social/>
+                </Tab>
             </Tabs>
         </>
     )
