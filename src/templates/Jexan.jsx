@@ -215,30 +215,27 @@ const Jexan = () => {
                                         </a>                                       
                                     )
                                 }
-                                                                {
+                                {
                                     userData.twitter && (
                                         <a href={userData.twitter} target="_blank" rel="noreferrer" className="mr-1 twitter">
                                             <FontAwesomeIcon icon={faTwitter} size="2x"/>
                                         </a>                                       
                                     )
                                 }
-                                                                {
+                                {
                                     userData.linkedin && (
                                         <a href={userData.linkedin} target="_blank" rel="noreferrer" className="mr-1 linkedin">
                                             <FontAwesomeIcon icon={faLinkedin} size="2x"/>
                                         </a>                                       
                                     )
                                 }
-                                                                {
+                                {
                                     userData.youtube && (
                                         <a href={userData.youtube} target="_blank" rel="noreferrer" className="youtube">
                                             <FontAwesomeIcon icon={faYoutube} size="2x"/>
                                         </a>                                       
                                     )
-                                }
-
-                                
-                            
+                                }                           
                             </td>
                         </tr>
                         : null
@@ -253,7 +250,6 @@ const Jexan = () => {
                             </tr>
                         )
                     }
-
                 </tbody>
             </table>
         </div>

@@ -9,7 +9,18 @@ import { faSquare, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 const CropImage = (props) => {
-    const {show, setShow, imageFile, handleUpload, progress, uploading, imageWidth, imageHeight} = props;
+    const {
+         show,
+         setShow,
+         imageFile,
+         handleUpload,
+         progress,
+         uploading,
+         imageWidth,
+         imageHeight,
+         aspectTop,
+         aspectBottom
+        } = props;
 
     const ORIENTATION_TO_ANGLE = {
         '3': 180,
@@ -89,7 +100,7 @@ const CropImage = (props) => {
                                 crop={crop}
                                 rotation={rotation}
                                 zoom={zoom}
-                                aspect={1 / 1}
+                                aspect={aspectTop / aspectBottom}
                                 onCropChange={setCrop}
                                 onRotationChange={setRotation}
                                 onZoomChange={setZoom}

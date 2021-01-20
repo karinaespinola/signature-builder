@@ -7,21 +7,25 @@ import BannerDropDown from './BannerDropDown';
 
 const Images = () => {
   const {userData, updateUserData} = React.useContext(UserDataContext);
-  const [avatarImageUrl, setAvatarImageUrl] = React.useState(null);
   const [avatarFileName, setAvatarFileName] = React.useState(null);
   const [bannerImageUrl, setBannerImageUrl] = React.useState(null);
   const [bannerFileName, setBannerFileName] = React.useState(null);
 
 
   const updateAvatarImageUrl = (url) => {
-    setAvatarImageUrl(url);
-    updateUserData({...userData, avatarImageUrl: url});
+    const object = {avatarImageUrl: url}
+    updateUserData({...userData, ...object});
+  }
+
+  const updateAvatarImageFileName = (name) => {
+    setAvatarFileName(name)
+    const object = {avatarImageFileName: name}
+    updateUserData({...userData, ...object});
   }
   
   const handleAvatarDeleteButton = (event) => {
-    storage.ref("images").child(avatarFileName).delete()
+    storage.ref("images").child(userData.avatarImageFileName).delete()
     .then(function() {
-      setAvatarImageUrl(null);
       updateUserData({...userData, avatarImageUrl: null})
       setAvatarFileName(null);
     }).catch(function(error) {
@@ -64,7 +68,9 @@ const Images = () => {
           previewWidth={150}
           showDeleteButton={true}
           handleDeleteButton={handleAvatarDeleteButton}
-          setFileName={setAvatarFileName}
+          setFileName={updateAvatarImageFileName}
+          aspectTop={1}
+          aspectBottom={1}
           />
 
           <AddImageLink updateImageLink={updateAvatarLink} />

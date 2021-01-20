@@ -15,7 +15,9 @@ const UploadImage = (props) => {
       previewWidth, 
       showDeleteButton, 
       handleDeleteButton,
-      setFileName
+      setFileName,
+      aspectTop,
+      aspectBottom
     } = props;
     
     const [show, setShow] = React.useState(false);
@@ -52,8 +54,8 @@ const UploadImage = (props) => {
               .child(imageFileName + '.png')
               .getDownloadURL()
               .then(url => {
-                updateContextProperty(url);
                 setFileName(imageFileName + '.png');
+                updateContextProperty(url);
                 setUploading(false);
                 setProgress(20);
                 setShow(false);
@@ -83,6 +85,8 @@ const UploadImage = (props) => {
                     uploading={uploading} 
                     imageWidth={imageWidth}
                     imageHeight={imageHeight}
+                    aspectTop={aspectTop}
+                    aspectBottom={aspectBottom}
                     />
                 </>               
             }
