@@ -42,7 +42,7 @@ const BannerDropDown = () => {
 
     return (
         <div>
-            <DropdownButton id="dropdown-item-button" title="Pick a banner" variant="primary" className="banner-dropdown" size="lg">
+            <DropdownButton id="dropdown-item-button" title="Pick a banner" variant="primary" className="banner-dropdown">
                 <Dropdown.Item 
                 as="button" 
                 eventKey="none"
