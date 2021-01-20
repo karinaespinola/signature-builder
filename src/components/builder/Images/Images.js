@@ -9,7 +9,8 @@ const Images = () => {
   const {userData, updateUserData} = React.useContext(UserDataContext);
   const [avatarImageUrl, setAvatarImageUrl] = React.useState(null);
   const [avatarFileName, setAvatarFileName] = React.useState(null);
-
+  const [bannerImageUrl, setBannerImageUrl] = React.useState(null);
+  const [bannerFileName, setBannerFileName] = React.useState(null);
 
 
   const updateAvatarImageUrl = (url) => {
@@ -28,8 +29,28 @@ const Images = () => {
     });
   }
 
+  const handleBannerDeleteButton = (event) => {
+    storage.ref("images").child(avatarFileName).delete()
+    .then(function() {
+      setBannerImageUrl(null);
+      updateUserData({...userData, bannerUrl: null})
+      setBannerFileName(null);
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+
   const updateAvatarLink = (link) => {
     updateUserData({...userData, avatarImageLink: link})
+  }
+
+  const updateBannerLink = (link) => {
+    updateUserData({...userData, bannerImageLink: link})
+  }
+
+  const updateBannerImageUrl = (url) => {
+    setBannerImageUrl(url);
+    updateUserData({...userData, bannerUrl: url});
   }
 
     return (
@@ -51,6 +72,18 @@ const Images = () => {
           <hr></hr>
           <h4>Banner</h4>
           <BannerDropDown />
+          <UploadImage 
+            updateContextProperty={updateBannerImageUrl} 
+            imageWidth={300} 
+            imageHeight={50} 
+            imagePreviewUrl={userData.bannerUrl}
+            previewWidth={300}
+            showDeleteButton={true}
+            handleDeleteButton={handleBannerDeleteButton}
+            setFileName={setBannerFileName}
+          />
+
+          <AddImageLink updateImageLink={updateBannerLink} />
         </>
     )
 }

@@ -1,10 +1,14 @@
 import React from 'react';
 import {DropdownButton, Dropdown} from 'react-bootstrap';
 import 'firebase/database';
-import {storage, database} from '../../../firebase/firebase';
+import {database} from '../../../firebase/firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import {UserDataContext} from '../../../contexts/UserDataProvider';
 
 
 const BannerDropDown = () => {
+    const {userData, updateUserData} = React.useContext(UserDataContext);
     const [banners, setBanners] = React.useState([]);
 
     React.useEffect(() => {
@@ -22,16 +26,39 @@ const BannerDropDown = () => {
         });       
     }
 
+    const handleBannerClick = (bannerId) => {
+        console.log(bannerId);
+        let filteredElements = banners.filter((banner) => {
+            return banner.id === bannerId;
+        })
+
+        if(filteredElements.length > 0) {
+            updateUserData({...userData, bannerUrl : filteredElements[0].url});
+        }
+        else {
+            updateUserData({...userData, bannerUrl : null});
+        }       
+    }
+
     return (
         <div>
             <DropdownButton id="dropdown-item-button" title="Pick a banner" variant="primary" className="banner-dropdown" size="lg">
-                <Dropdown.Item as="button" eventKey="none">
+                <Dropdown.Item 
+                as="button" 
+                eventKey="none"
+                onClick={(e) => {handleBannerClick('none')}}
+                >
                     None
                 </Dropdown.Item>
                 {
                     banners.map((banner) => 
                         (
-                            <Dropdown.Item as="button" key={banner.id} eventKey={banner.id}>
+                            <Dropdown.Item 
+                            as="button" 
+                            key={banner.id} 
+                            eventKey={banner.id}
+                            onClick={(e) => {handleBannerClick(banner.id)}}
+                            >
                                 <img src={banner.url}></img>
                             </Dropdown.Item>
                         )

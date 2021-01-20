@@ -196,7 +196,13 @@ const Jexan = () => {
                     }
 
                     {
-                        
+                        userData.bannerUrl && (
+                            <tr>
+                                <td width={300}>
+                                    <img src={userData.bannerUrl} alt="Banner" style={{maxWidth: '300px'}}/>
+                                </td>
+                            </tr>
+                        )
                     }
 
                 </tbody>
