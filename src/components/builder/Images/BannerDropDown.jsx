@@ -27,16 +27,14 @@ const BannerDropDown = () => {
     }
 
     const handleBannerClick = (bannerId) => {
-        console.log(bannerId);
         let filteredElements = banners.filter((banner) => {
             return banner.id === bannerId;
         })
-
         if(filteredElements.length > 0) {
-            updateUserData({...userData, bannerUrl : filteredElements[0].url});
+            updateUserData({...userData, bannerUrl : filteredElements[0].url, customBanner: false});
         }
         else {
-            updateUserData({...userData, bannerUrl : null});
+            updateUserData({...userData, bannerUrl : null, customBanner: false});
         }       
     }
 

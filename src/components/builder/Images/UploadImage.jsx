@@ -8,10 +8,12 @@ import {getFileName} from '../../../utilities/String';
 
 const UploadImage = (props) => {
     const {
+      fileInputId,
       updateContextProperty, 
       imageWidth, 
       imageHeight, 
-      imagePreviewUrl, 
+      imagePreviewUrl,
+      showPreview, 
       previewWidth, 
       showDeleteButton, 
       handleDeleteButton,
@@ -67,7 +69,7 @@ const UploadImage = (props) => {
     return (
         <>
             {
-                imagePreviewUrl 
+                imagePreviewUrl && showPreview === true
                 ?  <ImagePreview 
                     src={imagePreviewUrl} 
                     previewWidth={previewWidth} 
@@ -75,7 +77,7 @@ const UploadImage = (props) => {
                     handleDeleteButton={handleDeleteButton}
                     />
                 :<>
-                    <UploadButton fileInputId="avatar" handleFileChange={handleFileChange} setShow={setShow}/>
+                    <UploadButton fileInputId={fileInputId} handleFileChange={handleFileChange} setShow={setShow}/>
                     <CropImage 
                     show={show} 
                     imageFile={imageFile} 
