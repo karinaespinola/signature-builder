@@ -9,6 +9,7 @@ import {getFileName} from '../../../utilities/String';
 const UploadImage = (props) => {
     const {
       fileInputId,
+      onUploadComplete,
       updateContextProperty, 
       imageWidth, 
       imageHeight, 
@@ -56,8 +57,12 @@ const UploadImage = (props) => {
               .child(imageFileName + '.png')
               .getDownloadURL()
               .then(url => {
-                setFileName(imageFileName + '.png');
-                updateContextProperty(url);
+                onUploadComplete({
+                  url : url,
+                  fileName: imageFileName + '.png'
+                });
+                // setFileName(imageFileName + '.png');
+                // updateContextProperty(url);
                 setUploading(false);
                 setProgress(20);
                 setShow(false);

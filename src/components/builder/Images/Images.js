@@ -11,18 +11,14 @@ const Images = () => {
   const [bannerImageUrl, setBannerImageUrl] = React.useState(null);
   const [bannerFileName, setBannerFileName] = React.useState(null);
 
-
-  const updateAvatarImageUrl = (url) => {
-    const object = {avatarImageUrl: url}
-    updateUserData({...userData, ...object});
+  const handleUploadComplete = (data) => {
+    updateUserData({
+      ...userData, 
+      avatarImageUrl : data.url,
+      avatarImageFileName: data.fileName
+    });
   }
 
-  const updateAvatarImageFileName = (name) => {
-    setAvatarFileName(name)
-    const object = {avatarImageFileName: name}
-    updateUserData({...userData, ...object});
-  }
-  
   const handleAvatarDeleteButton = (event) => {
     storage.ref("images").child(userData.avatarImageFileName).delete()
     .then(function() {
@@ -67,7 +63,7 @@ const Images = () => {
           <h4>Avatar</h4>
           <UploadImage
           fileInputId={"avatar"}
-          updateContextProperty={updateAvatarImageUrl} 
+          onUploadComplete={handleUploadComplete} 
           imageWidth={300} 
           imageHeight={300} 
           imagePreviewUrl={userData.avatarImageUrl}
@@ -75,7 +71,6 @@ const Images = () => {
           previewWidth={150}
           showDeleteButton={true}
           handleDeleteButton={handleAvatarDeleteButton}
-          setFileName={updateAvatarImageFileName}
           aspectTop={1}
           aspectBottom={1}
           />
