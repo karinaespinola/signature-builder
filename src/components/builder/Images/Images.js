@@ -11,11 +11,20 @@ const Images = () => {
   const [bannerImageUrl, setBannerImageUrl] = React.useState(null);
   const [bannerFileName, setBannerFileName] = React.useState(null);
 
-  const handleUploadComplete = (data) => {
+  const handleAvatarUploadComplete = (data) => {
     updateUserData({
       ...userData, 
       avatarImageUrl : data.url,
       avatarImageFileName: data.fileName
+    });
+  }
+
+  const handleBannerUploadComplete = (data) => {
+    updateUserData({
+      ...userData, 
+      bannerUrl : data.url,
+      bannerImageFileName: data.fileName,
+      customBanner : true
     });
   }
 
@@ -48,22 +57,12 @@ const Images = () => {
     updateUserData({...userData, bannerImageLink: link})
   }
 
-  const updateBannerImageUrl = (url) => {
-    setBannerImageUrl(url);
-    updateUserData({...userData, bannerUrl: url, customBanner: true});
-  }
-
-  const updateBannerImageFileName = (name) => {
-    const object = {bannerImageFileName: name}
-    updateUserData({...userData, ...object});
-  }
-
     return (
         <>
           <h4>Avatar</h4>
           <UploadImage
           fileInputId={"avatar"}
-          onUploadComplete={handleUploadComplete} 
+          onUploadComplete={handleAvatarUploadComplete} 
           imageWidth={300} 
           imageHeight={300} 
           imagePreviewUrl={userData.avatarImageUrl}
@@ -75,14 +74,15 @@ const Images = () => {
           aspectBottom={1}
           />
 
-          <AddImageLink updateImageLink={updateAvatarLink} />
+          <AddImageLink updateImageLink={updateAvatarLink} link={userData.avatarImageLink} />
 
           <hr></hr>
+          
           <h4>Banner</h4>
           <BannerDropDown />
           <UploadImage 
             fileInputId={"banner"}
-            updateContextProperty={updateBannerImageUrl} 
+            onUploadComplete={handleBannerUploadComplete}  
             imageWidth={300} 
             imageHeight={42} 
             imagePreviewUrl={userData.bannerUrl}
@@ -90,12 +90,11 @@ const Images = () => {
             previewWidth={300}
             showDeleteButton={true}
             handleDeleteButton={handleBannerDeleteButton}
-            setFileName={updateBannerImageFileName}
             aspectTop={50}
             aspectBottom={7}
           />
 
-          <AddImageLink updateImageLink={updateBannerLink} />
+          <AddImageLink updateImageLink={updateBannerLink} link={userData.bannerImageLink}/>
         </>
     )
 }

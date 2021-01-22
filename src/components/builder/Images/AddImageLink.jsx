@@ -4,12 +4,7 @@ import {Form, Row, Col} from 'react-bootstrap';
 import {UserDataContext} from '../../../contexts/UserDataProvider';
 
 const AddImageLink = (props) => {
-    const {userData, updateUserData} = React.useContext(UserDataContext);
-    const {updateImageLink} = props;
-
-    const changeUserData = (data) => {
-        updateUserData({...userData,...data});
-    }
+    const {updateImageLink, link} = props;
     
     return (
         <Form className="mt-3">
@@ -20,7 +15,7 @@ const AddImageLink = (props) => {
                 <Col sm="8">
                     <Form.Control plaintext 
                     name="name" 
-                    value={userData.avatarImageLink ? userData.avatarImageLink : ''} 
+                    value={link} 
                     onChange={(e) => updateImageLink(e.target.value)}/>
                 </Col>
             </Form.Group>
