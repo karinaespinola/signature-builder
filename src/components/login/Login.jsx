@@ -1,11 +1,21 @@
 import React from 'react';
 import firebase from '../../firebase/firebase';
-import {Card} from 'react-bootstrap';
+import {Card, Button} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+
 
 const Login = () => {
     return (
-        <Card className="login-card">
-            <Card.Body>This is some text within a card body.</Card.Body>
+        <Card className="bg-light-grey p-5">
+            <Card.Body>
+                <Button className="bg-blue btn-login" size="lg">
+                    <span className="btn-icon leftx">
+                        <FontAwesomeIcon icon={faGoogle}></FontAwesomeIcon>
+                    </span> 
+                        Google
+                </Button>
+            </Card.Body>
         </Card>
     )
 }

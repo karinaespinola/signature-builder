@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,600&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 html, body {
     font-family: 'Montserrat';
     font-size: $font-size;
@@ -28,4 +33,40 @@ a.link {
 
 .linkedin {
     color: #2867B2;
+}
+
+.bg-grey {
+    background-color: $light-grey;
+}
+
+.bg-light-grey {
+    background-color: $light-grey-100;
+}
+
+.card {
+    border-radius: 20px;
+    border: none;
+}
+
+.bg-blue{
+ background-color: $google-blue;
+}
+
+.no-border {
+    border: none;
+}
+
+.btn-login{
+    width: 250px;
+    padding: 0;
+    line-height: 1.9;
+}
+
+.btn-icon {
+    background-color: rgba($color: #fff, $alpha: 0.25);
+    width: 35px;
+    height: 35px;
+    line-height: 2;
+    border-radius: 50%;
+    float: left;
 }
