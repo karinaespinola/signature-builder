@@ -5,13 +5,24 @@ import {auth} from '../firebase/firebase';
 export const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
-    const [user, setUser] = React.useState();
+    const [user, setUser] = React.useState(false);
 
     React.useEffect(() => {
         auth.onAuthStateChanged((user) => {
-            setUser(user);
+            if(user) {
+                console.log(user);
+                setUser(user);
+            }
+            else {
+                setUser(null)
+            }            
         });
     }, [])
+    if(user === false) {
+        return (
+            <p>Loading...</p>
+        )
+    }
 
     return (
         <AuthContext.Provider value={{user}}>

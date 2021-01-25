@@ -12,13 +12,13 @@ const Dashboard = (props) => {
 
    React.useEffect(() => {
        console.log(user);
-        if(!user) {
+        if(user === null) {
             props.history.push('/login');
         }
         else {
             setLoading(false);
         }
-   }, [])
+   }, [user])
 
     return (
         <>
