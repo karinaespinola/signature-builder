@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import {auth} from '../firebase/firebase';
+import LabLoader from '../loaders/LabLoader';
 
 export const AuthContext = React.createContext();
 
@@ -18,9 +19,11 @@ const AuthProvider = (props) => {
             }            
         });
     }, [])
+
+    
     if(user === false) {
         return (
-            <p>Loading...</p>
+            <LabLoader />
         )
     }
 
