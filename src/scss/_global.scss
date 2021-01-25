@@ -60,6 +60,12 @@ a.link {
     width: 250px;
     padding: 0;
     line-height: 1.9;
+
+    &.btn-google-login {
+        &:hover {
+            background-color: darken($google-blue, 10%);
+        }
+    }
 }
 
 .btn-icon {
@@ -69,4 +75,16 @@ a.link {
     line-height: 2;
     border-radius: 50%;
     float: left;
+}
+
+h1 {
+    font-size: $h1;
+}
+
+h2 {
+    font-size: $h2;
+}
+
+h3 { 
+    font-size: $h3;
 }
